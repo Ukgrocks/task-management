@@ -26,13 +26,13 @@ export class AppComponent implements OnInit {
  isAuthenticated=false;
  isAuthenticated1=false;
  isAuthenticated2=false;
-private urladd: string ='http://localhost:6500/tasks/newtasks'
-private url1: string='http://localhost:6500/tasks/fetchalldata';
-private url2: string='http://localhost:6500/tasks/deletetasks';
-private url3: string='http://localhost:6500/tasks/fetchdonetask';
-private url4: string='http://localhost:6500/tasks/fetchtodo';
-private url5: string='http://localhost:6500/tasks/fetchinprogress';
-private url6: string='http://localhost:6500/tasks/api/export';
+private urladd: string ='http://task-manager-new-production.up.railway.app/tasks/newtasks'
+private url1: string='http://task-manager-new-production.up.railway.app/tasks/fetchalldata';
+private url2: string='http://task-manager-new-production.up.railway.app/tasks/deletetasks';
+private url3: string='http://task-manager-new-production.up.railway.app/tasks/fetchdonetask';
+private url4: string='http://task-manager-new-production.up.railway.app/tasks/fetchtodo';
+private url5: string='http://task-manager-new-production.up.railway.app/tasks/fetchinprogress';
+private url6: string='http://task-manager-new-production.up.railway.app/tasks/api/export';
 constructor(private httpClient: HttpClient,private cdRef: ChangeDetectorRef) {}
 ngOnInit(): void {
   fetch(this.url1)
@@ -82,7 +82,7 @@ deleteItem(_id: string) {
 // }
 
 exportData() {
-  const apiUrl = 'http://localhost:6500/tasks/api/export'; 
+  const apiUrl = 'http://task-manager-new-production.up.railway.app/tasks/api/export'; 
    
  this.httpClient.get(apiUrl).subscribe(() => console.log(`deleted item with id`));
 

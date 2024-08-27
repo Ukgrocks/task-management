@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script>
+    <script src="https://kit.fontawesome.com/5f0da26763.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100">
+
+    <nav class="bg-black shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-lg font-bold text-white">Task Manager App</div>
+                <div class="flex space-x-4 items-center">
+                  <!-- <div class="dropdown dropdown-hover">
+                    <button tabindex="0" class="btn btn-warning">Filter</button>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-white rounded-box w-52">
+                        <li><a href="#">Done</a></li>
+                        <li><a href="#">In-Progress</a></li>
+                        <li><a href="#">To-be-done</a></li>
+                    </ul>
+                </div> -->
+                
+                    <button (click)="exportData()" class="btn btn-success">Export Data</button>
+                    <div>
+                        <h1 style="color:aliceblue;">DONE</h1>
+                <input id="hello" (change)="onCheckboxChange($event)" type="checkbox" class="toggle" />
+                </div>
+                <div>
+                    <h1 style="color:aliceblue;">TODO</h1>
+                <input id="hello2" (change)="onCheckboxChange1($event)" type="checkbox" class="toggle" />
+            </div>
+            <div>
+                <h1 style="color:aliceblue;">PROGRESS</h1>
+            <input id="hello3" (change)="onCheckboxChange2($event)" type="checkbox" class="toggle" />
+        </div>
+                    <!-- <button class="btn btn-secondary">Done</button>
+                    <button  class="btn btn-accent">To-Do</button>
+                    <button class="btn btn-info">Progress</button> -->
+                   
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-2 my-2">
+      
+        <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            <div *ngIf="!isAuthenticated && !isAuthenticated1 && !isAuthenticated2; then loggedOutTemplate"></div>
+            <div *ngIf="isAuthenticated; then loggedInTemplate"></div>
+            <div *ngIf="isAuthenticated1; then loggedInTemplate1"></div>
+            <div *ngIf="isAuthenticated2; then loggedInTemplate2"></div>
+   
+
+<ng-template #loggedInTemplate>
+    <div
+    *ngFor="let item of data2"
+    class="card shadow-xl"
+    [ngClass] = "{
+      'bg-red-200': item.status === 'to-do',
+      'bg-green-200': item.status === 'done',
+      'bg-yellow-200': item.status === 'in-progress'
+    }"
+    >
+    <div class="card-body">
+      <h1 class="card-title">{{ item.title }}</h1>
+      <h3>{{ item.description }}</h3>
+    </div>
+    <div class="card-actions justify-end">
+
+<button (click)="deleteItem(item._id)">
+<svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000"><path d="M267.33-120q-27.5 0-47.08-19.58-19.58-19.59-19.58-47.09V-740h-7.34q-14.16 0-23.75-9.62-9.58-9.61-9.58-23.83 0-14.22 9.58-23.72 9.59-9.5 23.75-9.5H352q0-14.33 9.58-23.83 9.59-9.5 23.75-9.5h189.34q14.16 0 23.75 9.58 9.58 9.59 9.58 23.75h158.67q14.16 0 23.75 9.62 9.58 9.62 9.58 23.83 0 14.22-9.58 23.72-9.59 9.5-23.75 9.5h-7.34v553.33q0 27.5-19.58 47.09Q720.17-120 692.67-120H267.33Zm425.34-620H267.33v553.33h425.34V-740ZM398.12-270.67q14.21 0 23.71-9.58t9.5-23.75v-319.33q0-14.17-9.61-23.75-9.62-9.59-23.84-9.59-14.21 0-23.71 9.59-9.5 9.58-9.5 23.75V-304q0 14.17 9.61 23.75 9.62 9.58 23.84 9.58Zm164 0q14.21 0 23.71-9.58t9.5-23.75v-319.33q0-14.17-9.61-23.75-9.62-9.59-23.84-9.59-14.21 0-23.71 9.59-9.5 9.58-9.5 23.75V-304q0 14.17 9.61 23.75 9.62 9.58 23.84 9.58ZM267.33-740v553.33V-740Z"/></svg>   
+</button>
+
+</div>
+</div>
+</ng-template>
+
+<ng-template #loggedInTemplate1>
+    <div
+    *ngFor="let item of data3"
+    class="card shadow-xl"
+    [ngClass] = "{
+      'bg-red-200': item.status === 'to-do',
+      'bg-green-200': item.status === 'done',
+      'bg-yellow-200': item.status === 'in-progress'
+    }"
+    >
+    <div class="card-body">
+      <h1 class="card-title">{{ item.title }}</h1>
+      <h3>{{ item.description }}</h3>
+    </div>
+    <div class="card-actions justify-end">
+
+<button (click)="deleteItem(item._id)">
+<svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000"><path d="M267.33-120q-27.5 0-47.08-19.58-19.58-19.59-19.58-47.09V-740h-7.34q-14.16 0-23.75-9.62-9.58-9.61-9.58-23.83 0-14.22 9.58-23.72 9.59-9.5 23.75-9.5H352q0-14.33 9.58-23.83 9.59-9.5 23.75-9.5h189.34q14.16 0 23.75 9.58 9.58 9.59 9.58 23.75h158.67q14.16 0 23.75 9.62 9.58 9.62 9.58 23.83 0 14.22-9.58 23.72-9.59 9.5-23.75 9.5h-7.34v553.33q0 27.5-19.58 47.09Q720.17-120 692.67-120H267.33Zm425.34-620H267.33v553.33h425.34V-740ZM398.12-270.67q14.21 0 23.71-9.58t9.5-23.75v-319.33q0-14.17-9.61-23.75-9.62-9.59-23.84-9.59-14.21 0-23.71 9.59-9.5 9.58-9.5 23.75V-304q0 14.17 9.61 23.75 9.62 9.58 23.84 9.58Zm164 0q14.21 0 23.71-9.58t9.5-23.75v-319.33q0-14.17-9.61-23.75-9.62-9.59-23.84-9.59-14.21 0-23.71 9.59-9.5 9.58-9.5 23.75V-304q0 14.17 9.61 23.75 9.62 9.58 23.84 9.58ZM267.33-740v553.33V-740Z"/></svg>   
+</button>
+
+</div>
+</div>
+</ng-template>
+
+<ng-template #loggedInTemplate2>
+    <div
+    *ngFor="let item of data4"
+    class="card shadow-xl"
+    [ngClass] = "{
+      'bg-red-200': item.status === 'to-do',
+      'bg-green-200': item.status === 'done',
+      'bg-yellow-200': item.status === 'in-progress'
+    }"
+    >
+    <div class="card-body">
+      <h1 class="card-title">{{ item.title }}</h1>
+      <h3>{{ item.description }}</h3>
+    </div>
+    <div class="card-actions justify-end">
+
+<button (click)="deleteItem(item._id)">
+<svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000"><path d="M267.33-120q-27.5 0-47.08-19.58-19.58-19.59-19.58-47.09V-740h-7.34q-14.16 0-23.75-9.62-9.58-9.61-9.58-23.83 0-14.22 9.58-23.72 9.59-9.5 23.75-9.5H352q0-14.33 9.58-23.83 9.59-9.5 23.75-9.5h189.34q14.16 0 23.75 9.58 9.58 9.59 9.58 23.75h158.67q14.16 0 23.75 9.62 9.58 9.62 9.58 23.83 0 14.22-9.58 23.72-9.59 9.5-23.75 9.5h-7.34v553.33q0 27.5-19.58 47.09Q720.17-120 692.67-120H267.33Zm425.34-620H267.33v553.33h425.34V-740ZM398.12-270.67q14.21 0 23.71-9.58t9.5-23.75v-319.33q0-14.17-9.61-23.75-9.62-9.59-23.84-9.59-14.21 0-23.71 9.59-9.5 9.58-9.5 23.75V-304q0 14.17 9.61 23.75 9.62 9.58 23.84 9.58Zm164 0q14.21 0 23.71-9.58t9.5-23.75v-319.33q0-14.17-9.61-23.75-9.62-9.59-23.84-9.59-14.21 0-23.71 9.59-9.5 9.58-9.5 23.75V-304q0 14.17 9.61 23.75 9.62 9.58 23.84 9.58ZM267.33-740v553.33V-740Z"/></svg>   
+</button>
+
+</div>
+</div>
+</ng-template>
+
+<ng-template #loggedOutTemplate>
+    <div
+    *ngFor="let item of data"
+    class="card shadow-xl"
+    [ngClass] = "{
+      'bg-red-200': item.status === 'to-do',
+      'bg-green-200': item.status === 'done',
+      'bg-yellow-200': item.status === 'in-progress'
+    }"
+    >
+    <div class="card-body">
+      <h1 class="card-title">{{ item.title }}</h1>
+      <h3>{{ item.description }}</h3>
+    </div>
+    <div class="card-actions justify-end">
+
+<button (click)="deleteItem(item._id)">
+<svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000"><path d="M267.33-120q-27.5 0-47.08-19.58-19.58-19.59-19.58-47.09V-740h-7.34q-14.16 0-23.75-9.62-9.58-9.61-9.58-23.83 0-14.22 9.58-23.72 9.59-9.5 23.75-9.5H352q0-14.33 9.58-23.83 9.59-9.5 23.75-9.5h189.34q14.16 0 23.75 9.58 9.58 9.59 9.58 23.75h158.67q14.16 0 23.75 9.62 9.58 9.62 9.58 23.83 0 14.22-9.58 23.72-9.59 9.5-23.75 9.5h-7.34v553.33q0 27.5-19.58 47.09Q720.17-120 692.67-120H267.33Zm425.34-620H267.33v553.33h425.34V-740ZM398.12-270.67q14.21 0 23.71-9.58t9.5-23.75v-319.33q0-14.17-9.61-23.75-9.62-9.59-23.84-9.59-14.21 0-23.71 9.59-9.5 9.58-9.5 23.75V-304q0 14.17 9.61 23.75 9.62 9.58 23.84 9.58Zm164 0q14.21 0 23.71-9.58t9.5-23.75v-319.33q0-14.17-9.61-23.75-9.62-9.59-23.84-9.59-14.21 0-23.71 9.59-9.5 9.58-9.5 23.75V-304q0 14.17 9.61 23.75 9.62 9.58 23.84 9.58ZM267.33-740v553.33V-740Z"/></svg>   
+</button>
+
+</div>
+</div>
+</ng-template>
+</div>
+<div class="min-h-screen flex items-center justify-center">
+<form #myform="ngForm" (ngSubmit)="onSubmit(myform)" class="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
+  <div class="mb-4">
+    <label for="title" class="block text-gray-700 font-bold mb-2">Title:</label>
+  <input type="text" name="title" placeholder="Enter the Title" class="input input-bordered w-full" required ngModel />
+  </div>
+  <div class="mb-4">
+    <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
+  <input type="text" name="description" placeholder="Enter description"  class="input input-bordered w-full" required ngModel />
+  </div>
+
+  <div class="mb-4">
+    <label for="status" class="block text-gray-700 font-bold mb-2">Status</label>
+    <select
+      id="status"
+      name="status"
+      class="select select-bordered w-full"
+      required
+      ngModel
+    >
+      <option value="to-do">To-Do</option>
+      <option value="in-progress">In-Progress</option>
+      <option value="done">Done</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary w-full">Add Note</button>
+</form>
+</div>
+    </div>
+    
+
+</body>
+</html>

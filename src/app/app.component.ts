@@ -90,7 +90,7 @@ exportData() {
 
 
 onSubmit(form: NgForm) {
-  window.location.reload()
+
 console.log('Your form data:', form.value);
 return this.httpClient.post(this.urladd, form.value).subscribe(() => console.log('added item'))
 }

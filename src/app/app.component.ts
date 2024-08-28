@@ -71,8 +71,8 @@ onCheckboxChange2(event: Event) {
 }
 
 deleteItem(_id: string) {
-  window.location.reload()
-  return this.httpClient.delete(this.url2+"/"+_id).subscribe(() => console.log(`deleted item with id + ${_id}`))
+
+  return this.httpClient.delete(this.url2+"/"+_id).subscribe(() => window.location.reload())
 }
 
 // addplus(){
@@ -92,8 +92,8 @@ exportData() {
 onSubmit(form: NgForm) {
 
 console.log('Your form data:', form.value);
-return this.httpClient.post(this.urladd, form.value).subscribe(() => console.log('added item'))
-window.location.reload()
+return this.httpClient.post(this.urladd, form.value).subscribe(() => window.location.reload())
+
 }
 
 

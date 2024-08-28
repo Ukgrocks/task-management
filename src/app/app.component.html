@@ -25,7 +25,9 @@
                         <li><a href="#">To-be-done</a></li>
                     </ul>
                 </div> -->
-                
+                <a href="#adding">
+                 <button class="btn btn-success">Add Task</button>
+                </a>
                     <button (click)="exportData()" class="btn btn-success">Export Data</button>
                     <div>
                         <h1 style="color:aliceblue;">DONE</h1>
@@ -153,7 +155,7 @@
 </div>
 </ng-template>
 </div>
-<div class="min-h-screen flex items-center justify-center">
+<div id="adding"  class="min-h-screen flex items-center justify-center">
 <form #myform="ngForm" (ngSubmit)="onSubmit(myform)" class="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
   <div class="mb-4">
     <label for="title" class="block text-gray-700 font-bold mb-2">Title:</label>
@@ -179,7 +181,7 @@
     </select>
   </div>
 
-  <button type="submit" class="btn btn-primary w-full">Add Note</button>
+  <button type="submit" class="btn btn-primary w-full">Add</button>
 </form>
 </div>
     </div>

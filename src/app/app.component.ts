@@ -83,7 +83,7 @@ deleteItem(_id: string) {
 
 exportData() {
   const apiUrl = 'https://task-manager-new-production.up.railway.app/tasks/api/export'; 
- fetch(apiUrl1, {
+ fetch(apiUrl, {
     method: 'GET',
     headers: {
       'Content-Type': 'text/csv'
